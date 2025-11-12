@@ -2,6 +2,18 @@ class Circle
 {
     private double _radius;
 
+    public Circle()
+    {
+        _radius = 0.0;
+        Console.WriteLine("In the default constructor");
+    }
+
+    public Circle(double radius)
+    {
+        SetRadius(radius);
+        Console.WriteLine("In the NONdefault constructor");
+    }
+
     public void SetRadius(double radius)
     {
         if (radius < 0)
