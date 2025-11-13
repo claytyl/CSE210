@@ -1,29 +1,35 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Fraction Class Test\n");
+        Reference reference = new Reference("Proverbs", 3, 5, 6);
+        Scripture scripture = new Scripture(reference, 
+            "Trust in the Lord with all thine heart and lean not unto thine own understanding.");
 
-        Fraction f1 = new Fraction();
-        Console.WriteLine($"f1 (default): {f1.GetFractionString()} = {f1.GetDecimalValue()}");
+        while (true)
+        {
+            Console.Clear();
+            scripture.Display();
+            Console.WriteLine("\nPress Enter to hide more words or type 'quit' to end:");
+            string input = Console.ReadLine();
 
-        Fraction f2 = new Fraction(5);
-        Console.WriteLine($"f2 (top only): {f2.GetFractionString()} = {f2.GetDecimalValue()}");
+            if (input.ToLower() == "quit")
+                break;
 
-        Fraction f3 = new Fraction(3, 4);
-        Console.WriteLine($"f3 (top and bottom): {f3.GetFractionString()} = {f3.GetDecimalValue()}");
+            scripture.HideWords(3);
 
-        Fraction f4 = new Fraction(1, 3);
-        Console.WriteLine($"f4: {f4.GetFractionString()} = {f4.GetDecimalValue()}");
-
-        f3.SetTop(6);
-        f3.SetBottom(7);
-        Console.WriteLine($"\nAfter using setters on f3:");
-        Console.WriteLine($"New f3 fraction: {f3.GetFractionString()} = {f3.GetDecimalValue()}");
-
-        Console.WriteLine("\nPress any key to exit...");
-        Console.ReadKey();
+            if (scripture.AllHidden())
+            {
+                Console.Clear();
+                scripture.Display();
+                Console.WriteLine("\nAll words are now hidden. Well done!");
+                break;
+            }
+        }
     }
 }
+
